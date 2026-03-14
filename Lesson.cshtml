@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero card">
+    <div class="hero-copy">
+        <span class="pill">Training platform</span>
+        <h1>ALICE Training in C#</h1>
+        <p class="lead">This Milestone 2 version keeps the clean, simple feel of your PHP training system while adding quizzes, certificates, and an admin course builder in ASP.NET Core MVC with SQLite.</p>
+        <div class="hero-actions">
+            <a asp-controller="Account" asp-action="Login" class="btn">Sign in</a>
+            <a asp-controller="Account" asp-action="Register" class="btn ghost">Create account</a>
+        </div>
+        <p class="muted mt">Demo learner: learner@alice.local / Learner123!</p>
+        <p class="muted">Demo admin: admin@alice.local / Admin123!</p>
+    </div>
+</section>
+
+<section class="grid top-gap">
+    <article class="card">
+        <h3>Dashboard and courses</h3>
+        <p>Learners can sign in, browse enrolled courses, continue lessons, and track completion progress.</p>
+    </article>
+    <article class="card">
+        <h3>Quizzes and certificates</h3>
+        <p>Each course can include a final knowledge check and unlock a certificate once the learner passes.</p>
+    </article>
+    <article class="card">
+        <h3>Admin builder</h3>
+        <p>Admins can create courses, modules, lessons, quizzes, and questions directly in the C# application.</p>
+    </article>
+</section>

@@ -1,0 +1,14 @@
+namespace AliceTrainingSystem.Models;
+
+public class QuizAttempt
+{
+    public int Id { get; set; }
+    public int CourseQuizId { get; set; }
+    public int UserId { get; set; }
+    public int ScorePercent { get; set; }
+    public bool Passed { get; set; }
+    public DateTime AttemptedAtUtc { get; set; } = DateTime.UtcNow;
+
+    public CourseQuiz? CourseQuiz { get; set; }
+    public AppUser? User { get; set; }
+}

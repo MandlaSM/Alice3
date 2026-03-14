@@ -1,0 +1,19 @@
+namespace AliceTrainingSystem.ViewModels;
+
+public class AdminDashboardViewModel
+{
+    public int CourseCount { get; set; }
+    public int ModuleCount { get; set; }
+    public int LessonCount { get; set; }
+    public int QuizCount { get; set; }
+    public List<CourseAdminListItemViewModel> Courses { get; set; } = new();
+}
+
+public class CourseAdminListItemViewModel
+{
+    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public int ModuleCount { get; set; }
+    public int LessonCount { get; set; }
+    public bool HasQuiz { get; set; }
+}

@@ -1,0 +1,4 @@
+@model CreateCourseViewModel
+@{ ViewData["Title"] = "Create course"; }
+<section class="auth-wrap"><div class="card auth-card"><h1>Create course</h1><form asp-action="CreateCourse" method="post" class="form">@Html.AntiForgeryToken()<label asp-for="Title"></label><input asp-for="Title" /><span asp-validation-for="Title" class="field-error"></span><label asp-for="Slug"></label><input asp-for="Slug" /><span asp-validation-for="Slug" class="field-error"></span><label asp-for="Summary"></label><textarea asp-for="Summary" rows="4"></textarea><span asp-validation-for="Summary" class="field-error"></span><label asp-for="HeroText"></label><input asp-for="HeroText" /><span asp-validation-for="HeroText" class="field-error"></span><div class="row top-gap"><a asp-action="Index" class="btn ghost">Back</a><button type="submit" class="btn">Save course</button></div></form></div></section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

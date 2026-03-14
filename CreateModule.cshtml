@@ -1,0 +1,60 @@
+@model CourseDetailsViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="hero card compact">
+    <span class="pill">@Model.HeroText</span>
+    <h1>@Model.Title</h1>
+    <p class="lead">@Model.Summary</p>
+    <p class="muted">@Model.CompletedLessons of @Model.TotalLessons lessons complete</p>
+    <div class="progress"><span style="width:@Model.ProgressPercent%"></span></div>
+    <div class="row wrap top-gap-sm">
+        <span class="muted">Progress: @Model.ProgressPercent%</span>
+        <div class="row wrap">
+            @if (Model.HasQuiz)
+            {
+                if (Model.BestQuizScorePercent.HasValue)
+                {
+                    <span class="pill @(Model.QuizPassed ? "success-pill" : string.Empty)">Best quiz score: @Model.BestQuizScorePercent%</span>
+                }
+                if (Model.CanTakeQuiz)
+                {
+                    <a asp-controller="Quiz" asp-action="Take" asp-route-courseId="@Model.Id" class="btn small">Take final quiz</a>
+                }
+                if (Model.CanDownloadCertificate)
+                {
+                    <a asp-controller="Certificate" asp-action="Course" asp-route-courseId="@Model.Id" class="btn ghost small">View certificate</a>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="top-gap">
+    @foreach (var module in Model.Modules)
+    {
+        <article class="card module-card top-gap-sm">
+            <h2>@module.Title</h2>
+            <p class="muted">@module.Summary</p>
+            <ul class="list lesson-list">
+                @foreach (var lesson in module.Lessons)
+                {
+                    <li class="row wrap">
+                        <div>
+                            <strong>@lesson.Title</strong>
+                            <div class="muted">@lesson.Summary</div>
+                        </div>
+                        <div class="row wrap">
+                            @if (lesson.Completed)
+                            {
+                                <span class="pill success-pill">Completed</span>
+                            }
+                            <a asp-action="Lesson" asp-route-id="@lesson.Id" class="btn small">Open lesson</a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </article>
+    }
+</section>

@@ -1,0 +1,33 @@
+@model QuizResultViewModel
+@{
+    ViewData["Title"] = "Quiz result";
+}
+
+<section class="hero card compact">
+    <span class="pill @(Model.Passed ? "success-pill" : string.Empty)">@(Model.Passed ? "Passed" : "Not passed")</span>
+    <h1>@Model.QuizTitle</h1>
+    <p class="lead">Course: @Model.CourseTitle</p>
+    <div class="stats-row top-gap-sm">
+        <div class="stat card mini">
+            <strong>@Model.ScorePercent%</strong>
+            <span>Your score</span>
+        </div>
+        <div class="stat card mini">
+            <strong>@Model.PassMarkPercent%</strong>
+            <span>Pass mark</span>
+        </div>
+    </div>
+    <p class="muted top-gap-sm">Attempted on @Model.AttemptedAtUtc.ToLocalTime().ToString("dd MMM yyyy HH:mm")</p>
+</section>
+
+<section class="row wrap top-gap">
+    <a asp-controller="Courses" asp-action="Details" asp-route-id="@Model.CourseId" class="btn ghost">Back to course</a>
+    @if (Model.Passed)
+    {
+        <a asp-controller="Certificate" asp-action="Course" asp-route-courseId="@Model.CourseId" class="btn">View certificate</a>
+    }
+    else
+    {
+        <a asp-controller="Quiz" asp-action="Take" asp-route-courseId="@Model.CourseId" class="btn">Retake quiz</a>
+    }
+</section>

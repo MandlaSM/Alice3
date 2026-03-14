@@ -1,0 +1,40 @@
+@model CourseDetailsViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="hero card compact">
+    <span class="pill">@Model.HeroText</span>
+    <h1>@Model.Title</h1>
+    <p class="lead">@Model.Summary</p>
+    <p class="muted">@Model.CompletedLessons of @Model.TotalLessons lessons complete</p>
+    <div class="progress"><span style="width:@Model.ProgressPercent%"></span></div>
+</section>
+
+<section class="top-gap">
+    @foreach (var module in Model.Modules)
+    {
+        <article class="card module-card top-gap-sm">
+            <h2>@module.Title</h2>
+            <p class="muted">@module.Summary</p>
+            <ul class="list lesson-list">
+                @foreach (var lesson in module.Lessons)
+                {
+                    <li class="row wrap">
+                        <div>
+                            <strong>@lesson.Title</strong>
+                            <div class="muted">@lesson.Summary</div>
+                        </div>
+                        <div class="row wrap">
+                            @if (lesson.Completed)
+                            {
+                                <span class="pill success-pill">Completed</span>
+                            }
+                            <a asp-action="Lesson" asp-route-id="@lesson.Id" class="btn small">Open lesson</a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </article>
+    }
+</section>

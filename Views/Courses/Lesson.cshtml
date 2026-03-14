@@ -1,0 +1,54 @@
+@model LessonViewModel
+@{
+    ViewData["Title"] = Model.LessonTitle;
+}
+
+<section class="hero card compact">
+    <span class="pill">@Model.CourseTitle</span>
+    <h1>@Model.LessonTitle</h1>
+    <p class="lead">@Model.Summary</p>
+    <p class="muted">@Model.ModuleTitle</p>
+    <div class="progress"><span style="width:@Model.ProgressPercent%"></span></div>
+    <p class="muted">Course progress: @Model.ProgressPercent%</p>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.VideoUrl))
+{
+    <section class="card top-gap">
+        <div class="video-wrapper">
+            <iframe src="@Model.VideoUrl" title="Lesson video" allowfullscreen></iframe>
+        </div>
+    </section>
+}
+
+<section class="card top-gap lesson-content">
+    @Html.Raw(Model.ContentHtml)
+</section>
+
+<section class="row wrap top-gap">
+    <div class="row wrap">
+        @if (Model.PreviousLessonId.HasValue)
+        {
+            <a asp-action="Lesson" asp-route-id="@Model.PreviousLessonId" class="btn ghost">Previous lesson</a>
+        }
+        @if (Model.NextLessonId.HasValue)
+        {
+            <a asp-action="Lesson" asp-route-id="@Model.NextLessonId" class="btn ghost">Next lesson</a>
+        }
+    </div>
+
+    <div class="row wrap">
+        @if (Model.Completed)
+        {
+            <span class="pill success-pill">Marked complete</span>
+        }
+        else
+        {
+            <form asp-action="CompleteLesson" asp-route-id="@Model.LessonId" method="post" class="inline-form">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn">Mark complete</button>
+            </form>
+        }
+        <a asp-action="Details" asp-route-id="@Model.CourseId" class="btn ghost">Back to course</a>
+    </div>
+</section>

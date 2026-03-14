@@ -1,9 +1,0 @@
-namespace AliceTrainingSystem.ViewModels;
-
-public class ModuleViewModel
-{
-    public int Id { get; set; }
-    public string Title { get; set; } = string.Empty;
-    public string Summary { get; set; } = string.Empty;
-    public List<LessonListItemViewModel> Lessons { get; set; } = new();
-}
